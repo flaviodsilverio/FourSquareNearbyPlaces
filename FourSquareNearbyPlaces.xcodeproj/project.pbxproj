@@ -14,6 +14,7 @@
 		1B025FFC2053D7FD00EF63D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B025FFA2053D7FD00EF63D7 /* LaunchScreen.storyboard */; };
 		1B0260072053D7FD00EF63D7 /* FourSquareNearbyPlacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260062053D7FD00EF63D7 /* FourSquareNearbyPlacesTests.swift */; };
 		1B0260122053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260112053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.swift */; };
+		1B0260212053E07300EF63D7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0260202053E07300EF63D7 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		1B02600D2053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourSquareNearbyPlacesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B0260112053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareNearbyPlacesUITests.swift; sourceTree = "<group>"; };
 		1B0260132053D7FD00EF63D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B0260202053E07300EF63D7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0260212053E07300EF63D7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 				1B0260052053D7FD00EF63D7 /* FourSquareNearbyPlacesTests */,
 				1B0260102053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests */,
 				1B025FEF2053D7FD00EF63D7 /* Products */,
+				1B02601F2053E07300EF63D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +127,14 @@
 				1B0260132053D7FD00EF63D7 /* Info.plist */,
 			);
 			path = FourSquareNearbyPlacesUITests;
+			sourceTree = "<group>";
+		};
+		1B02601F2053E07300EF63D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B0260202053E07300EF63D7 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,10 +439,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4TU97ESE9C;
+				DEVELOPMENT_TEAM = NXBHE32CVP;
 				INFOPLIST_FILE = FourSquareNearbyPlaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = silverio.flavio.FourSquareNearbyPlaces;
+				PRODUCT_BUNDLE_IDENTIFIER = silverio.flavio.apps.FourSquareNearbyPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -442,10 +454,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4TU97ESE9C;
+				DEVELOPMENT_TEAM = NXBHE32CVP;
 				INFOPLIST_FILE = FourSquareNearbyPlaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = silverio.flavio.FourSquareNearbyPlaces;
+				PRODUCT_BUNDLE_IDENTIFIER = silverio.flavio.apps.FourSquareNearbyPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
