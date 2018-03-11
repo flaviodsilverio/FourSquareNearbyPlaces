@@ -17,13 +17,39 @@ class RequestManager {
     let session = URLSession.shared
     
     func perform(requestWith endpoint: String, completion
-        completion: ((_ success: Bool,_ data: JSON, _ error: String)->())) {
+        completion: @escaping ((_ success: Bool,_ data: JSON?, _ error: String?)->())) {
         
         guard let url = URL(string: endpoint)  else { return }
         
         session.dataTask(with: url) { (data, urlResponse, error) in
             
-            print(urlResponse as! HTTPURLResponse)
+            guard let urlResponse = urlResponse as? HTTPURLResponse else {
+                completion(false, nil, nil)
+                return
+            }
+            
+            switch urlResponse.statusCode {
+                
+            case 200:
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? JSON
+                    
+                    DispatchQueue.main.async {
+                        completion(true, json, nil)
+                    }
+                    
+                } catch let error as NSError {
+                    
+                }
+                
+                break
+            case 404:
+                break
+            default:
+                break
+            }
+            print(urlResponse.statusCode)
             
         }.resume()
         
@@ -32,5 +58,6 @@ class RequestManager {
     
         
     }
+
 
 

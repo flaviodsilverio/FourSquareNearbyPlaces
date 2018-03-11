@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="KGk-i7-Jjw" customClass="VenueListItemCell" customModule="FourSquareNearbyPlaces" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="77"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="360" height="76.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oX-Ug-SOV">
+                        <rect key="frame" x="16" y="11.5" width="40" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sp3-jB-0Ip">
+                        <rect key="frame" x="16" y="40.5" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8oX-Ug-SOV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11.5" id="6a5-U4-ve6"/>
+                    <constraint firstAttribute="bottom" secondItem="Sp3-jB-0Ip" secondAttribute="bottom" constant="15.5" id="927-ay-qp8"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8oX-Ug-SOV" secondAttribute="trailing" constant="16" id="KRs-BQ-VeK"/>
+                    <constraint firstItem="8oX-Ug-SOV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="WPK-8K-PZz"/>
+                    <constraint firstItem="Sp3-jB-0Ip" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="WQe-bm-ahL"/>
+                    <constraint firstItem="Sp3-jB-0Ip" firstAttribute="top" secondItem="8oX-Ug-SOV" secondAttribute="bottom" constant="8" id="iow-wy-AMC"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Sp3-jB-0Ip" secondAttribute="trailing" constant="16" id="lzv-El-gB8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="locationLabel" destination="8oX-Ug-SOV" id="n0f-lr-fsf"/>
+                <outlet property="nameLabel" destination="Sp3-jB-0Ip" id="Mmw-kC-7mi"/>
+            </connections>
+            <point key="canvasLocation" x="52" y="145.5"/>
+        </tableViewCell>
+    </objects>
+</document>

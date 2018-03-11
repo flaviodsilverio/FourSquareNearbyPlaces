@@ -9,42 +9,37 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    
-
+    @IBOutlet weak var tableView: UITableView!
     
     var locationManager = CLLocationManager()
     
+    let viewModel = VenuesPageVM()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let nib = UINib(nibName: "VenueListItemCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
+        
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         
-        mapView.delegate = self
-        
-        //var request = URLRequest(url: URL(string: )!)
-//        request.addValue("FH0RMGQ2VXYS4PX1LTL5JBE0KUJ2MOU1QBTX5BXVBAXLSHSK", forHTTPHeaderField: "client_id")
-//        request.addValue("3FCXEDF3AFTU5SG3OHXVYIQGJM2HNISMYGBHBB4VEHFDFBIG", forHTTPHeaderField: "client_secret")
-        
-//        session.dataTask(with: request) { (data, response, error) in
-//            
-//            print(response as! HTTPURLResponse)
-//            
-//        }.resume()
-        
-        /*
-         client_id: 'CLIENT_ID',
-         client_secret: 'CLIENT_SECRET'
-         */
-        
-        RequestManager.shared.perform(requestWith: "") { (success: Bool, data: JSON) -> () in
-            print("")
+        viewModel.completion = {
+            (success, error) in
+            
+            if success == true {
+                self.tableView.reloadData()
+            }
         }
+        
+        mapView.delegate = self
     }
     
     // MARK: - LocationManager delegate methods
@@ -61,10 +56,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
@@ -104,5 +95,25 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
 
+}
+
+extension VenuesPageVC: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfItems
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? VenueListItemCell else { return UITableViewCell() }
+        
+        cell.configure(with: viewModel.viewModel(forItem: indexPath))
+        
+        return cell
+    }
 }
 
