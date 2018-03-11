@@ -13,7 +13,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     @IBOutlet weak var mapView: MKMapView!
     
-    let session = URLSession.shared
+
     
     var locationManager = CLLocationManager()
     
@@ -27,20 +27,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         mapView.delegate = self
         
-        var request = URLRequest(url: URL(string: "https://api.foursquare.com/v2/venues/explore?&client_id=FH0RMGQ2VXYS4PX1LTL5JBE0KUJ2MOU1QBTX5BXVBAXLSHSK&client_secret=3FCXEDF3AFTU5SG3OHXVYIQGJM2HNISMYGBHBB4VEHFDFBIG")!)
+        //var request = URLRequest(url: URL(string: )!)
 //        request.addValue("FH0RMGQ2VXYS4PX1LTL5JBE0KUJ2MOU1QBTX5BXVBAXLSHSK", forHTTPHeaderField: "client_id")
 //        request.addValue("3FCXEDF3AFTU5SG3OHXVYIQGJM2HNISMYGBHBB4VEHFDFBIG", forHTTPHeaderField: "client_secret")
         
-        session.dataTask(with: request) { (data, response, error) in
-            
-            print(response as! HTTPURLResponse)
-            
-        }.resume()
+//        session.dataTask(with: request) { (data, response, error) in
+//            
+//            print(response as! HTTPURLResponse)
+//            
+//        }.resume()
         
         /*
          client_id: 'CLIENT_ID',
          client_secret: 'CLIENT_SECRET'
          */
+        
+        RequestManager.shared.perform(requestWith: "") { (success: Bool, data: JSON) -> () in
+            print("")
+        }
     }
     
     // MARK: - LocationManager delegate methods
