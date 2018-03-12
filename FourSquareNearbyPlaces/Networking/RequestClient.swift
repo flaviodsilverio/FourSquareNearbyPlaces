@@ -25,9 +25,9 @@ class FourSquareRequestClient {
     
     let requestManager = RequestManager.shared
     
-    func get(venuesForLatitude lt: Float, andLongitude lg: Float){
+    func get(venuesForLatitude lat: Double, andLongitude long: Double){
         
-        guard let endpoint = (basePath + "venues/search?ll=" + lt.description + "," + lg.description + "&v=" + version + "&client_id=" + clientID + "&client_secret=" + secret) as? String else { return }
+        guard let endpoint = (basePath + "venues/search?ll=" + lat.description + "," + long.description + "&v=" + version + "&client_id=" + clientID + "&client_secret=" + secret) as? String else { return }
         
         requestManager.perform(requestWith: endpoint) { (success, data, error) in
             if success == true, data != nil {

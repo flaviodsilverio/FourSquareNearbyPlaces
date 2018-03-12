@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class VenuesPageVC: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +24,8 @@ class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let nib = UINib(nibName: "VenueListItemCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
         
+        mapView.register(VenueAnnotation.self, forAnnotationViewWithReuseIdentifier: "annotationView")
+        
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -36,6 +38,17 @@ class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             
             if success == true {
                 self.tableView.reloadData()
+                
+                self.viewModel.childViewModels.forEach { item in
+                   
+                    let annotation = MKPointAnnotation()
+                    let centerCoordinate = CLLocationCoordinate2D(latitude: Double(item.venueLat), longitude: Double(item.venueLong))
+                    annotation.coordinate = centerCoordinate
+                    annotation.title = item.venueName
+                    self.mapView.addAnnotation(annotation)
+                    
+                }
+
             }
         }
         
@@ -43,6 +56,43 @@ class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     // MARK: - LocationManager delegate methods
+  
+    @IBAction func action(_ sender: Any) {
+        locationManager.requestLocation()
+        
+
+        
+    }
+    
+
+}
+
+extension VenuesPageVC: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
+        mapView.setCenter((userLocation.location?.coordinate)!, animated: true)
+        
+        guard let latitude = userLocation.location?.coordinate.latitude,
+            let longitude = userLocation.location?.coordinate.longitude
+            else { return }
+        
+        viewModel.updateLocation(forLatitude: latitude, andLongitude: longitude)
+        
+    }
+    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//
+//        guard let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView") as? VenueAnnotation else { return nil }
+//
+//        annotationView.configure(with: VenueVM(with: Venue(with: venue())!))
+//
+//        return annotationView
+//    }
+}
+
+extension VenuesPageVC: CLLocationManagerDelegate {
+    
     
     private func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
@@ -56,24 +106,22 @@ class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
 
-    
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        
-        mapView.setCenter((userLocation.location?.coordinate)!, animated: true)
-        
-    }
+
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-       // mapView.setCenter((userLocation.location?.coordinate)!, animated: true)
-        //print(locations)
+        /*        let annotation = MKPointAnnotation()
+         let centerCoordinate = CLLocationCoordinate2D(latitude: 41, longitude:29)
+         annotation.coordinate = centerCoordinate
+         annotation.title = "Title"
+         mapView.addAnnotation(annotation)*/
         guard let location = locations.last else { return }
         
-//        let latitude = location.coordinate.latitude
-//        let longitude = location.coordinate.longitude
-//
-//        let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: (latitude + 5) - (latitude - 5), longitudeDelta: (longitude + 5) - (longitude - 5)))
-        
         mapView.setCenter(location.coordinate, animated: true)
+        
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        viewModel.updateLocation(forLatitude: latitude, andLongitude: longitude)
     }
     
     func mapViewDidFailLoadingMap(_ mapView: MKMapView, withError error: Error) {
@@ -84,17 +132,7 @@ class VenuesPageVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         print(error)
     }
 
-    @IBAction func action(_ sender: Any) {
-        locationManager.requestLocation()
-        
-        let annotation = MKPointAnnotation()
-        let centerCoordinate = CLLocationCoordinate2D(latitude: 41, longitude:29)
-        annotation.coordinate = centerCoordinate
-        annotation.title = "Title"
-        mapView.addAnnotation(annotation)
-    }
     
-
 }
 
 extension VenuesPageVC: UITableViewDataSource {
@@ -115,5 +153,37 @@ extension VenuesPageVC: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension VenuesPageVC {
+    
+    func venue() -> JSON {
+        return  ["id": "4fb147e9e4b08885003346dd",
+        "name": "pengegon institute",
+        "location": [
+            "address": "Pengegon",
+            "lat": 50.21542970853104,
+            "lng": -5.283300233794709,
+            "labeledLatLngs": [
+            [
+            "label": "display",
+            "lat": 50.21542970853104,
+            "lng": -5.283300233794709
+            ]
+            ],
+            "distance": 30,
+            "cc": "GB",
+            "city": "Camborne",
+            "state": "Cornualha",
+            "country": "Reino Unido",
+            "formattedAddress": [
+            "Pengegon",
+            "Camborne",
+            "Cornualha",
+            "Reino Unido"
+            ]
+        ]
+    ]
+}
 }
 

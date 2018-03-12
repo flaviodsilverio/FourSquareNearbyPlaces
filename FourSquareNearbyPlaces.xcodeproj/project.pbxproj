@@ -21,6 +21,7 @@
 		1BA5ED282055DCB600DCD826 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED272055DCB600DCD826 /* Venue.swift */; };
 		1BA5ED2E2055E03800DCD826 /* VenueListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED2C2055E03800DCD826 /* VenueListItemCell.swift */; };
 		1BA5ED2F2055E03800DCD826 /* VenueListItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */; };
+		1BA5ED3220571D8A00DCD826 /* VenueAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		1BA5ED272055DCB600DCD826 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		1BA5ED2C2055E03800DCD826 /* VenueListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueListItemCell.swift; sourceTree = "<group>"; };
 		1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VenueListItemCell.xib; sourceTree = "<group>"; };
+		1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 		1BA5ED292055DFB200DCD826 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1BA5ED3020571B9800DCD826 /* Annotation */,
 				1BA5ED2A2055DFB800DCD826 /* Cells */,
 			);
 			path = Views;
@@ -209,6 +212,14 @@
 				1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */,
 			);
 			path = VenueListItemCell;
+			sourceTree = "<group>";
+		};
+		1BA5ED3020571B9800DCD826 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */,
+			);
+			path = Annotation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +363,7 @@
 				1BA5ED2E2055E03800DCD826 /* VenueListItemCell.swift in Sources */,
 				1B025FF22053D7FD00EF63D7 /* AppDelegate.swift in Sources */,
 				1B0260242055773900EF63D7 /* RequestClient.swift in Sources */,
+				1BA5ED3220571D8A00DCD826 /* VenueAnnotation.swift in Sources */,
 				1B0260262055774600EF63D7 /* RequestManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

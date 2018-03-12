@@ -12,11 +12,21 @@ struct VenueVM {
     
     fileprivate let venue : Venue
     
-    var venueName : String
-    { return venue.name }
+    var venueName : String {
+        return venue.name
+    }
     
-    var venueLocation : String
-    { return venue.address.address }
+    var venueLocation : String {
+        return venue.address.address
+    }
+    
+    var venueLat : Float {
+        return venue.address.latitude
+    }
+    
+    var venueLong : Float {
+        return venue.address.longitude
+    }
     
     init(with venue: Venue) {
         self.venue = venue
@@ -43,10 +53,14 @@ class VenuesPageVM {
         
         client.delegate = self
         
-        client.get(venuesForLatitude: 50.2156570, andLongitude: -5.2832920)
+       // client.get(venuesForLatitude: 50.2156570, andLongitude: -5.2832920)
         RequestManager.shared.perform(requestWith: "") { (success: Bool, data: JSON?, error: String?) -> () in
             print("")
         }
+    }
+    
+    func updateLocation(forLatitude lat: Double, andLongitude long: Double) {
+        client.get(venuesForLatitude: lat, andLongitude: long)
     }
 }
 
