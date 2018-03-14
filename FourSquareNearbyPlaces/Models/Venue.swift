@@ -9,36 +9,34 @@
 import Foundation
 
 struct Venue {
-    
-    let id : String
-    let name : String
-    let address : AddressDetails
-    
+
+    let id: String
+    let name: String
+    let address: AddressDetails
+
     init?(with json: JSON) {
-        
+
         guard let id = json["id"] as? String, let name = json["name"] as? String else {
             return nil
         }
 
         self.id = id
         self.name = name
-        self.address = AddressDetails(with: json["location"] as! JSON)
+        self.address = AddressDetails(with: json["location"] as? JSON ?? [:])
     }
-    
 }
 
 struct AddressDetails {
-    
-    let latitude : Float
-    let longitude : Float
-    let address : String
-    let cc : String
-    let city : String
-    let state : String
-    let country : String
+
+    let latitude: Float
+    let longitude: Float
+    let address: String
+    let cc: String
+    let city: String
+    let state: String
+    let country: String
 
     init(with json: JSON) {
-        
         latitude = json["lat"] as? Float ?? 0
         longitude = json["lng"] as? Float ?? 0
         address = json["address"] as? String ?? "N/A"
@@ -46,7 +44,5 @@ struct AddressDetails {
         city = json["city"] as? String ?? "N/A"
         state = json["state"] as? String ?? "N/A"
         country = json["country"] as? String ?? "N/A"
-
     }
-    
 }

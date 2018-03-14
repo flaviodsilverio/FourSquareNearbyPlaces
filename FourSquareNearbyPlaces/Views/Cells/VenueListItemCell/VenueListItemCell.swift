@@ -12,7 +12,7 @@ class VenueListItemCell: UITableViewCell {
 
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,9 +23,9 @@ class VenueListItemCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with vm: VenueVM) {
-        
+
         locationLabel.text = vm.venueLocation
         nameLabel.text = vm.venueName
         

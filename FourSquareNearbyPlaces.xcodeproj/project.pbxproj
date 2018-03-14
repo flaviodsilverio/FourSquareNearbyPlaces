@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092CCD823AD6BAA46AB7A98F /* Pods_FourSquareNearbyPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54D856D6DE2A236227D3B68 /* Pods_FourSquareNearbyPlaces.framework */; };
 		1B025FF22053D7FD00EF63D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B025FF12053D7FD00EF63D7 /* AppDelegate.swift */; };
 		1B025FF42053D7FD00EF63D7 /* VenuesPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B025FF32053D7FD00EF63D7 /* VenuesPageVC.swift */; };
 		1B025FF72053D7FD00EF63D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B025FF52053D7FD00EF63D7 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		1BA5ED2E2055E03800DCD826 /* VenueListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED2C2055E03800DCD826 /* VenueListItemCell.swift */; };
 		1BA5ED2F2055E03800DCD826 /* VenueListItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */; };
 		1BA5ED3220571D8A00DCD826 /* VenueAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */; };
+		E3F50A955AC2D3C29305FA7E /* Pods_FourSquareNearbyPlacesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9833D8AF1F75F4BA45BBCD /* Pods_FourSquareNearbyPlacesTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,12 @@
 		1BA5ED2C2055E03800DCD826 /* VenueListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueListItemCell.swift; sourceTree = "<group>"; };
 		1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VenueListItemCell.xib; sourceTree = "<group>"; };
 		1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAnnotation.swift; sourceTree = "<group>"; };
+		317858A0CF06D8425C8D8AF1 /* Pods-FourSquareNearbyPlacesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlacesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlacesTests/Pods-FourSquareNearbyPlacesTests.release.xcconfig"; sourceTree = "<group>"; };
+		51D0A2B2B584646F4C757FB3 /* Pods-FourSquareNearbyPlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlaces.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlaces/Pods-FourSquareNearbyPlaces.debug.xcconfig"; sourceTree = "<group>"; };
+		563B4FEA718D69F99C102B29 /* Pods-FourSquareNearbyPlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlaces.release.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlaces/Pods-FourSquareNearbyPlaces.release.xcconfig"; sourceTree = "<group>"; };
+		614DBCD40A92857F9821F10A /* Pods-FourSquareNearbyPlacesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlacesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlacesTests/Pods-FourSquareNearbyPlacesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A54D856D6DE2A236227D3B68 /* Pods_FourSquareNearbyPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FourSquareNearbyPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA9833D8AF1F75F4BA45BBCD /* Pods_FourSquareNearbyPlacesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FourSquareNearbyPlacesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0260212053E07300EF63D7 /* MapKit.framework in Frameworks */,
+				092CCD823AD6BAA46AB7A98F /* Pods_FourSquareNearbyPlaces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3F50A955AC2D3C29305FA7E /* Pods_FourSquareNearbyPlacesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +109,7 @@
 				1B0260102053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests */,
 				1B025FEF2053D7FD00EF63D7 /* Products */,
 				1B02601F2053E07300EF63D7 /* Frameworks */,
+				F8536C98985F166AB49627CA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				1B0260202053E07300EF63D7 /* MapKit.framework */,
+				A54D856D6DE2A236227D3B68 /* Pods_FourSquareNearbyPlaces.framework */,
+				EA9833D8AF1F75F4BA45BBCD /* Pods_FourSquareNearbyPlacesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,6 +235,17 @@
 			path = Annotation;
 			sourceTree = "<group>";
 		};
+		F8536C98985F166AB49627CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				51D0A2B2B584646F4C757FB3 /* Pods-FourSquareNearbyPlaces.debug.xcconfig */,
+				563B4FEA718D69F99C102B29 /* Pods-FourSquareNearbyPlaces.release.xcconfig */,
+				614DBCD40A92857F9821F10A /* Pods-FourSquareNearbyPlacesTests.debug.xcconfig */,
+				317858A0CF06D8425C8D8AF1 /* Pods-FourSquareNearbyPlacesTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,9 +253,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B0260162053D7FD00EF63D7 /* Build configuration list for PBXNativeTarget "FourSquareNearbyPlaces" */;
 			buildPhases = (
+				9DBB3ABF1590B08EEF017E77 /* [CP] Check Pods Manifest.lock */,
 				1B025FEA2053D7FD00EF63D7 /* Sources */,
 				1B025FEB2053D7FD00EF63D7 /* Frameworks */,
 				1B025FEC2053D7FD00EF63D7 /* Resources */,
+				8CD946264FEB01D2E8C114A7 /* [CP] Embed Pods Frameworks */,
+				576922CFE43829020621F58E /* [CP] Copy Pods Resources */,
+				1B0C7A6420592EDD00637B37 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -246,9 +274,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B0260192053D7FD00EF63D7 /* Build configuration list for PBXNativeTarget "FourSquareNearbyPlacesTests" */;
 			buildPhases = (
+				7FB06A5A15D81FA9DAC9B44A /* [CP] Check Pods Manifest.lock */,
 				1B025FFE2053D7FD00EF63D7 /* Sources */,
 				1B025FFF2053D7FD00EF63D7 /* Frameworks */,
 				1B0260002053D7FD00EF63D7 /* Resources */,
+				D5027D57E96E28B510EB7BB5 /* [CP] Embed Pods Frameworks */,
+				9EA31FBE3AC18EDF1B7E5ED2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,6 +382,118 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B0C7A6420592EDD00637B37 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
+		};
+		576922CFE43829020621F58E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FourSquareNearbyPlaces/Pods-FourSquareNearbyPlaces-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7FB06A5A15D81FA9DAC9B44A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FourSquareNearbyPlacesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CD946264FEB01D2E8C114A7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FourSquareNearbyPlaces/Pods-FourSquareNearbyPlaces-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DBB3ABF1590B08EEF017E77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FourSquareNearbyPlaces-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EA31FBE3AC18EDF1B7E5ED2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FourSquareNearbyPlacesTests/Pods-FourSquareNearbyPlacesTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5027D57E96E28B510EB7BB5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FourSquareNearbyPlacesTests/Pods-FourSquareNearbyPlacesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1B025FEA2053D7FD00EF63D7 /* Sources */ = {
@@ -528,6 +671,7 @@
 		};
 		1B0260172053D7FD00EF63D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51D0A2B2B584646F4C757FB3 /* Pods-FourSquareNearbyPlaces.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -543,6 +687,7 @@
 		};
 		1B0260182053D7FD00EF63D7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 563B4FEA718D69F99C102B29 /* Pods-FourSquareNearbyPlaces.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -558,6 +703,7 @@
 		};
 		1B02601A2053D7FD00EF63D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 614DBCD40A92857F9821F10A /* Pods-FourSquareNearbyPlacesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -575,6 +721,7 @@
 		};
 		1B02601B2053D7FD00EF63D7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 317858A0CF06D8425C8D8AF1 /* Pods-FourSquareNearbyPlacesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

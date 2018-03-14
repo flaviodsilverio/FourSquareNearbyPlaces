@@ -11,25 +11,23 @@ import MapKit
 
 class VenueAnnotation: MKAnnotationView {
 
-    let textLabel : UILabel = UILabel()
-    
+    let textLabel: UILabel = UILabel()
+
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 
         self.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        
+
         textLabel.frame = self.bounds
         self.backgroundColor = .red
         self.addSubview(textLabel)
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    func configure(with vm: VenueVM) {
-        textLabel.text = vm.venueName
+
+    func configure(with viewModel: VenueVM) {
+        textLabel.text = viewModel.venueName
     }
-    
 }

@@ -8,56 +8,42 @@
 
 import Foundation
 
-typealias JSON = [String:Any]
+typealias JSON = [String: Any]
 
-class RequestManager {
-    
+final class RequestManager {
+
     static let shared = RequestManager()
-    
+
     let session = URLSession.shared
-    
-    func perform(requestWith endpoint: String, completion
-        completion: @escaping ((_ success: Bool,_ data: JSON?, _ error: String?)->())) {
-        
+
+    func perform(requestWith endpoint: String, _
+        completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)) {
+
         guard let url = URL(string: endpoint)  else { return }
-        
+
         session.dataTask(with: url) { (data, urlResponse, error) in
-            
             guard let urlResponse = urlResponse as? HTTPURLResponse else {
                 completion(false, nil, nil)
                 return
             }
-            
             switch urlResponse.statusCode {
-                
             case 200:
-                
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? JSON
-                    
+
                     DispatchQueue.main.async {
                         completion(true, json, nil)
                     }
-                    
+
                 } catch let error as NSError {
-                    
+
                 }
-                
-                break
             case 404:
                 break
             default:
                 break
             }
             print(urlResponse.statusCode)
-            
         }.resume()
-        
         }
-    
-    
-        
     }
-
-
-
