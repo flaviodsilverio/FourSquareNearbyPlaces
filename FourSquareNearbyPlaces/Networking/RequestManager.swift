@@ -20,7 +20,7 @@ final class RequestManager {
 
     func post(requestWith endpoint: String, andQuery query: JSON,_
         completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)){
-
+        //There's no need for post requests on the current demo project, otherwise they'd be built here.
     }
 
     func get(requestWith endpoint: String,_

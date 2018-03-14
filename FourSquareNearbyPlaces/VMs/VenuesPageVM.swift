@@ -52,16 +52,15 @@ final class VenuesPageVM {
         return childViewModels[index.row]
     }
 
-    func search(forVenueLocated near: String?) {
+    func search(forVenueLocated near: String) {
 
-        guard let near = near else {
+        if near == "" {
             isCurrentLocation = true
             getData(near: nil)
-            return
+        } else {
+            isCurrentLocation = false
+            getData(near: near)
         }
-
-        isCurrentLocation = false
-        getData(near: near)
     }
 
     init() {
@@ -76,13 +75,15 @@ final class VenuesPageVM {
 
 extension VenuesPageVM: RequestClientDelegate {
 
-    func getData(near location: String?){
+    func getData(near location: String?) {
 
-        if location != nil {
-
-        } else {
+        print(location)
+        
+        guard let location = location else {
             client.get(venuesForLatitude: currentCoordinates.lat, andLongitude: currentCoordinates.long)
+            return
         }
+        client.get(venuesNear: location)
     }
 
     func requestSuccess(with data: JSON) {
@@ -90,7 +91,20 @@ extension VenuesPageVM: RequestClientDelegate {
         guard let jsonResponse = data["response"] as? JSON,
             let items = jsonResponse["venues"] as? [JSON]
             else { print("error"); return }
+        
+        if isCurrentLocation == false {
+            guard let geocode = jsonResponse["geocode"] as? JSON,
+            let feature = geocode["feature"] as? JSON,
+            let geometry = feature["geometry"] as? JSON,
+            let center = geometry["center"] as? JSON,
+            let lat = center["lat"] as? Double,
+                let lng = center["lng"] as? Double else {
+                    return
+            }
+            currentCoordinates = (lat,lng)
+        }
 
+        
         items.forEach {
             childViewModels.append(VenueVM(with: Venue(with: $0)!))
         }

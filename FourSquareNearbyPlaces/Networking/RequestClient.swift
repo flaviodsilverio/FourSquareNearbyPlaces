@@ -44,11 +44,16 @@ final class FourSquareRequestClient {
         })
     }
 
-    func get(venues near: String){
+    func get(venuesNear location: String){
 
-        guard let endpoint = (basePath + "venues/v=" + version + "&client_id="
+        guard let endpoint = (basePath + "venues/search?near=" + location + "&v=" + version + "&client_id="
             + clientID + "&client_secret=" + secret) as? String
             else { return }
         
+        requestManager.get(requestWith: endpoint, { (success,data,error) in
+            if success == true, data != nil {
+                self.delegate?.requestSuccess(with: data!)
+            }
+        })
     }
 }

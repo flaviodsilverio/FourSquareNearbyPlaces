@@ -49,9 +49,10 @@ class VenuesPageVC: UIViewController {
                     annotation.coordinate = centerCoordinate
                     annotation.title = item.venueName
                     self.mapView.addAnnotation(annotation)
-
                 }
-
+                
+                self.center(mapOn: CLLocation(latitude: self.viewModel.currentCoordinates.lat,
+                                              longitude: self.viewModel.currentCoordinates.long))
             }
         }
 
@@ -163,7 +164,7 @@ extension VenuesPageVC: UITableViewDataSource {
 extension VenuesPageVC: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.search(forVenueLocated: searchBar.text)
+        viewModel.search(forVenueLocated: searchBar.text ?? "")
     }
 
 }
