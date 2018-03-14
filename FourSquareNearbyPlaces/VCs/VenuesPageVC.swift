@@ -160,6 +160,14 @@ extension VenuesPageVC: UITableViewDataSource {
     }
 }
 
+extension VenuesPageVC: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.search(forVenueLocated: searchBar.text)
+    }
+
+}
+
 extension VenuesPageVC {
     func venue() -> JSON {
         return  ["id": "4fb147e9e4b08885003346dd",

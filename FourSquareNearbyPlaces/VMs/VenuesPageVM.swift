@@ -40,6 +40,10 @@ final class VenuesPageVM {
 
     var completion : ((_ success: Bool, _ error: String?) -> Void)?
 
+    var isCurrentLocation : Bool = true
+
+    var currentCoordinates : (lat: Double, long: Double) = (0,0)
+
     var numberOfItems: Int {
         return childViewModels.count
     }
@@ -48,22 +52,38 @@ final class VenuesPageVM {
         return childViewModels[index.row]
     }
 
-    init() {
+    func search(forVenueLocated near: String?) {
 
-        client.delegate = self
-
-        // client.get(venuesForLatitude: 50.2156570, andLongitude: -5.2832920)
-        RequestManager.shared.perform(requestWith: "") { (success: Bool,data: JSON?,error: String?) -> Void in
-            print("")
+        guard let near = near else {
+            isCurrentLocation = true
+            getData(near: nil)
+            return
         }
+
+        isCurrentLocation = false
+        getData(near: near)
+    }
+
+    init() {
+        client.delegate = self
     }
 
     func updateLocation(forLatitude lat: Double, andLongitude long: Double) {
-        client.get(venuesForLatitude: lat, andLongitude: long)
+        currentCoordinates = (lat, long)
+        getData(near: nil)
     }
 }
 
 extension VenuesPageVM: RequestClientDelegate {
+
+    func getData(near location: String?){
+
+        if location != nil {
+
+        } else {
+            client.get(venuesForLatitude: currentCoordinates.lat, andLongitude: currentCoordinates.long)
+        }
+    }
 
     func requestSuccess(with data: JSON) {
 

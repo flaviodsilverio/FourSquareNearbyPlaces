@@ -16,12 +16,35 @@ final class RequestManager {
 
     let session = URLSession.shared
 
-    func perform(requestWith endpoint: String, _
+
+
+    func post(requestWith endpoint: String, andQuery query: JSON,_
+        completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)){
+
+    }
+
+    func get(requestWith endpoint: String,_
         completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)) {
 
-        guard let url = URL(string: endpoint)  else { return }
+        guard let request = make(requestWith: endpoint) else {
+            completion(false, nil, "")
+            return
+        }
 
-        session.dataTask(with: url) { (data, urlResponse, error) in
+        perform(requestWith: request, completion)
+    }
+
+    private func make(requestWith endpoint: String) -> URLRequest? {
+
+        guard let url = URL(string: endpoint)  else { return nil }
+
+        return URLRequest(url: url)
+    }
+
+    private func perform(requestWith urlRequest: URLRequest, _
+        completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)) {
+
+        session.dataTask(with: urlRequest) { (data, urlResponse, error) in
             guard let urlResponse = urlResponse as? HTTPURLResponse else {
                 completion(false, nil, nil)
                 return
@@ -45,5 +68,7 @@ final class RequestManager {
             }
             print(urlResponse.statusCode)
         }.resume()
+
+
         }
     }
