@@ -38,6 +38,12 @@ struct AutocompleteVM {
     var locationName : String {
         return json["description"] as? String ?? "nope"
     }
+    
+    var searchTerm: String {
+        let string = locationName.trimmingCharacters(in: .whitespaces)
+        print(string)
+        return string.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: ",", with: "")
+    }
 
     var json : JSON
 
@@ -104,7 +110,7 @@ final class VenuesPageVM {
 
         isCurrentLocation = false
 
-        self.getData(near: autoCompleteViewModels[index.row].locationName.components(separatedBy: ",").first?.components(separatedBy: " ").first)
+        self.getData(near: autoCompleteViewModels[index.row].searchTerm)
 
     }
 }
