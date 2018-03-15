@@ -16,8 +16,9 @@
 		1B0260072053D7FD00EF63D7 /* FourSquareNearbyPlacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260062053D7FD00EF63D7 /* FourSquareNearbyPlacesTests.swift */; };
 		1B0260122053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260112053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.swift */; };
 		1B0260212053E07300EF63D7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0260202053E07300EF63D7 /* MapKit.framework */; };
-		1B0260242055773900EF63D7 /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260232055773900EF63D7 /* RequestClient.swift */; };
+		1B0260242055773900EF63D7 /* FourSquareRequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260232055773900EF63D7 /* FourSquareRequestClient.swift */; };
 		1B0260262055774600EF63D7 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0260252055774600EF63D7 /* RequestManager.swift */; };
+		1B0C7A66205A961400637B37 /* GoogleAutoCompleteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C7A65205A961400637B37 /* GoogleAutoCompleteClient.swift */; };
 		1B6ADF80205591B8002C6FC5 /* VenuesPageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6ADF7F205591B8002C6FC5 /* VenuesPageVM.swift */; };
 		1BA5ED282055DCB600DCD826 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED272055DCB600DCD826 /* Venue.swift */; };
 		1BA5ED2E2055E03800DCD826 /* VenueListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED2C2055E03800DCD826 /* VenueListItemCell.swift */; };
@@ -58,8 +59,9 @@
 		1B0260112053D7FD00EF63D7 /* FourSquareNearbyPlacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareNearbyPlacesUITests.swift; sourceTree = "<group>"; };
 		1B0260132053D7FD00EF63D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B0260202053E07300EF63D7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		1B0260232055773900EF63D7 /* RequestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
+		1B0260232055773900EF63D7 /* FourSquareRequestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareRequestClient.swift; sourceTree = "<group>"; };
 		1B0260252055774600EF63D7 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		1B0C7A65205A961400637B37 /* GoogleAutoCompleteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleAutoCompleteClient.swift; path = /Users/flaviosilverio/Desktop/FourSquare/FourSquareNearbyPlaces/FourSquareNearbyPlaces/Networking/GoogleAutoCompleteClient.swift; sourceTree = "<absolute>"; };
 		1B6ADF7F205591B8002C6FC5 /* VenuesPageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenuesPageVM.swift; sourceTree = "<group>"; };
 		1BA5ED272055DCB600DCD826 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		1BA5ED2C2055E03800DCD826 /* VenueListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueListItemCell.swift; sourceTree = "<group>"; };
@@ -171,7 +173,8 @@
 		1B0260222055771500EF63D7 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				1B0260232055773900EF63D7 /* RequestClient.swift */,
+				1B0C7A65205A961400637B37 /* GoogleAutoCompleteClient.swift */,
+				1B0260232055773900EF63D7 /* FourSquareRequestClient.swift */,
 				1B0260252055774600EF63D7 /* RequestManager.swift */,
 			);
 			path = Networking;
@@ -502,10 +505,11 @@
 			files = (
 				1B025FF42053D7FD00EF63D7 /* VenuesPageVC.swift in Sources */,
 				1BA5ED282055DCB600DCD826 /* Venue.swift in Sources */,
+				1B0C7A66205A961400637B37 /* GoogleAutoCompleteClient.swift in Sources */,
 				1B6ADF80205591B8002C6FC5 /* VenuesPageVM.swift in Sources */,
 				1BA5ED2E2055E03800DCD826 /* VenueListItemCell.swift in Sources */,
 				1B025FF22053D7FD00EF63D7 /* AppDelegate.swift in Sources */,
-				1B0260242055773900EF63D7 /* RequestClient.swift in Sources */,
+				1B0260242055773900EF63D7 /* FourSquareRequestClient.swift in Sources */,
 				1BA5ED3220571D8A00DCD826 /* VenueAnnotation.swift in Sources */,
 				1B0260262055774600EF63D7 /* RequestManager.swift in Sources */,
 			);

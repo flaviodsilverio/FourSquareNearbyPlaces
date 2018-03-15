@@ -61,7 +61,8 @@ final class RequestManager {
                 } catch let error as NSError {
 
                 }
-            case 404:
+            case 400:
+                print(urlRequest)
                 break
             default:
                 break

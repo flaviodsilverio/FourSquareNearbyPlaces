@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol RequestClientDelegate: class {
-    func requestSuccess(with data: JSON)
-    func requestError(with text: String)
+protocol FourSquareRequestClientDelegate: class {
+    func fourSquareRequest(successWith data: JSON)
+    func fourSquareRequest(errorWith text: String)
 }
 
 final class FourSquareRequestClient {
@@ -24,7 +24,7 @@ final class FourSquareRequestClient {
     let basePath = "https://api.foursquare.com/v2/"
     let version = "20160607"
 
-    weak var delegate: RequestClientDelegate?
+    weak var delegate: FourSquareRequestClientDelegate?
 
     let requestManager = RequestManager.shared
 
@@ -39,7 +39,7 @@ final class FourSquareRequestClient {
 
         requestManager.get(requestWith: endpoint, { (success,data,error) in
             if success == true, data != nil {
-                self.delegate?.requestSuccess(with: data!)
+                self.delegate?.fourSquareRequest(successWith: data!)
             }
         })
     }
@@ -52,8 +52,9 @@ final class FourSquareRequestClient {
         
         requestManager.get(requestWith: endpoint, { (success,data,error) in
             if success == true, data != nil {
-                self.delegate?.requestSuccess(with: data!)
+                self.delegate?.fourSquareRequest(successWith: data!)
             }
         })
     }
+
 }

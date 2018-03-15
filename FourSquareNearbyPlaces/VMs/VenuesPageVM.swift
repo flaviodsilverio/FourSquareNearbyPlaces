@@ -33,10 +33,27 @@ struct VenueVM {
     }
 }
 
+struct AutocompleteVM {
+
+    var locationName : String {
+        return json["description"] as? String ?? "nope"
+    }
+
+    var json : JSON
+
+    init(with json: JSON) {
+        self.json = json
+    }
+
+}
+
 final class VenuesPageVM {
 
-    var childViewModels: [VenueVM] = []
-    let client = FourSquareRequestClient()
+    var venuesViewModels: [VenueVM] = []
+    var autoCompleteViewModels: [AutocompleteVM] = []
+
+    let fourSquareClient = FourSquareRequestClient()
+    let googleClient = GoogleAutoCompleteClient()
 
     var completion : ((_ success: Bool, _ error: String?) -> Void)?
 
@@ -44,12 +61,22 @@ final class VenuesPageVM {
 
     var currentCoordinates : (lat: Double, long: Double) = (0,0)
 
-    var numberOfItems: Int {
-        return childViewModels.count
+    var searchText : String = "" {
+        didSet {
+            googleClient.get(placeWith: searchText)
+        }
     }
 
-    func viewModel(forItemAt index: IndexPath) -> VenueVM {
-        return childViewModels[index.row]
+    var numberOfVenues: Int {
+        return venuesViewModels.count
+    }
+
+    func viewModel(forVenueAt index: IndexPath) -> VenueVM {
+        return venuesViewModels[index.row]
+    }
+
+    var numberOfAutocompletions: Int {
+        return autoCompleteViewModels.count
     }
 
     func search(forVenueLocated near: String) {
@@ -64,29 +91,38 @@ final class VenuesPageVM {
     }
 
     init() {
-        client.delegate = self
+        googleClient.delegate = self
+        fourSquareClient.delegate = self
     }
 
     func updateLocation(forLatitude lat: Double, andLongitude long: Double) {
         currentCoordinates = (lat, long)
         getData(near: nil)
     }
+
+    func didSelect(autocompleteItemAt index: IndexPath) {
+
+        isCurrentLocation = false
+
+        self.getData(near: autoCompleteViewModels[index.row].locationName.components(separatedBy: ",").first?.components(separatedBy: " ").first)
+
+    }
 }
 
-extension VenuesPageVM: RequestClientDelegate {
+extension VenuesPageVM: FourSquareRequestClientDelegate {
 
     func getData(near location: String?) {
 
         print(location)
         
         guard let location = location else {
-            client.get(venuesForLatitude: currentCoordinates.lat, andLongitude: currentCoordinates.long)
+            fourSquareClient.get(venuesForLatitude: currentCoordinates.lat, andLongitude: currentCoordinates.long)
             return
         }
-        client.get(venuesNear: location)
+        fourSquareClient.get(venuesNear: location)
     }
 
-    func requestSuccess(with data: JSON) {
+    func fourSquareRequest(successWith data: JSON) {
 
         guard let jsonResponse = data["response"] as? JSON,
             let items = jsonResponse["venues"] as? [JSON]
@@ -104,13 +140,32 @@ extension VenuesPageVM: RequestClientDelegate {
             currentCoordinates = (lat,lng)
         }
 
+        venuesViewModels = []
         
         items.forEach {
-            childViewModels.append(VenueVM(with: Venue(with: $0)!))
+            venuesViewModels.append(VenueVM(with: Venue(with: $0)!))
         }
         completion?(true, nil)
     }
 
-    func requestError(with text: String) {
+    func fourSquareRequest(errorWith text: String) {
     }
 }
+
+extension VenuesPageVM: GoogleAutoCompleteDelegate {
+
+    func success(with data: JSON) {
+
+        guard let items = data["predictions"] as? [JSON] else { return }
+
+        autoCompleteViewModels = []
+
+        items.forEach {
+            autoCompleteViewModels.append(AutocompleteVM(with: $0))
+        }
+
+        completion?(true, nil)
+    }
+}
+
+

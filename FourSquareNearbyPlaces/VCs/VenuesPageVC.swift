@@ -12,34 +12,49 @@ import MapKit
 class VenuesPageVC: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var venuesTableView: UITableView!
+    @IBOutlet weak var autoCompleteTableView: UITableView!
 
     var locationManager = CLLocationManager()
 
     let viewModel = VenuesPageVM()
 
+    var autocompleteIsVisible : Bool = false {
+        didSet {
+            if autocompleteIsVisible {
+                self.view.bringSubview(toFront: autoCompleteTableView)
+            } else {
+                self.view.sendSubview(toBack: autoCompleteTableView)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let nib = UINib(nibName: "VenueListItemCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "cell")
+        venuesTableView.register(nib, forCellReuseIdentifier: "venueCell")
 
         mapView.register(VenueAnnotation.self, forAnnotationViewWithReuseIdentifier: "annotationView")
         
-        tableView.estimatedRowHeight = 80
-        tableView.rowHeight = UITableViewAutomaticDimension
+        venuesTableView.estimatedRowHeight = 80
+        venuesTableView.rowHeight = UITableViewAutomaticDimension
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
 
+        autocompleteIsVisible = false
+
         viewModel.completion = {
             (success, error) in
 
             if success == true {
-                self.tableView.reloadData()
 
-                self.viewModel.childViewModels.forEach { item in
+                self.venuesTableView.reloadData()
+                self.autoCompleteTableView.reloadData()
+
+                self.viewModel.venuesViewModels.forEach { item in
 
                     let annotation = MKPointAnnotation()
                     let centerCoordinate = CLLocationCoordinate2D(
@@ -53,6 +68,8 @@ class VenuesPageVC: UIViewController {
                 
                 self.center(mapOn: CLLocation(latitude: self.viewModel.currentCoordinates.lat,
                                               longitude: self.viewModel.currentCoordinates.long))
+
+//                self.autocompleteIsVisible = false
             }
         }
 
@@ -135,7 +152,7 @@ extension VenuesPageVC: CLLocationManagerDelegate {
 
     func center(mapOn location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                 2000, 2000)
+                                                                 500, 500)
         mapView.setRegion(coordinateRegion, animated: true)
     }
 }
@@ -147,18 +164,47 @@ extension VenuesPageVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
+
+        if tableView == venuesTableView {
+            return viewModel.numberOfVenues
+        } else {
+            return viewModel.numberOfAutocompletions
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? VenueListItemCell
-            else { return UITableViewCell() }
+        if tableView == venuesTableView {
 
-        cell.configure(with: viewModel.viewModel(forItemAt: indexPath))
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "venueCell") as? VenueListItemCell
+                else { return UITableViewCell() }
 
-        return cell
+            cell.configure(with: viewModel.viewModel(forVenueAt: indexPath))
+
+            return cell
+
+        } else {
+
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autocompleteCell") as? UITableViewCell
+                else { return UITableViewCell() }
+
+            cell.textLabel?.text = viewModel.autoCompleteViewModels[indexPath.row].locationName
+
+            return cell
+
+        }
     }
+}
+
+extension VenuesPageVC: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == autoCompleteTableView {
+            viewModel.didSelect(autocompleteItemAt: indexPath)
+            autocompleteIsVisible = false
+        }
+    }
+
 }
 
 extension VenuesPageVC: UISearchBarDelegate {
@@ -167,6 +213,16 @@ extension VenuesPageVC: UISearchBarDelegate {
         viewModel.search(forVenueLocated: searchBar.text ?? "")
     }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        if searchText == "" {
+            autocompleteIsVisible = false
+        } else {
+            autocompleteIsVisible = true
+        }
+
+        viewModel.searchText = searchText
+    }
 }
 
 extension VenuesPageVC {
