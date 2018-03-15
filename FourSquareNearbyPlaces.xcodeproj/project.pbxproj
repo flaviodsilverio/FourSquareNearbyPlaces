@@ -24,6 +24,7 @@
 		1BA5ED2F2055E03800DCD826 /* VenueListItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */; };
 		1BA5ED3220571D8A00DCD826 /* VenueAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */; };
 		1BA5ED36205AFFF800DCD826 /* GoogleAutoCompleteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED35205AFFF800DCD826 /* GoogleAutoCompleteClient.swift */; };
+		1BA5ED38205B169E00DCD826 /* VenueDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5ED37205B169E00DCD826 /* VenueDetailsVC.swift */; };
 		E3F50A955AC2D3C29305FA7E /* Pods_FourSquareNearbyPlacesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9833D8AF1F75F4BA45BBCD /* Pods_FourSquareNearbyPlacesTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		1BA5ED2D2055E03800DCD826 /* VenueListItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VenueListItemCell.xib; sourceTree = "<group>"; };
 		1BA5ED3120571D8A00DCD826 /* VenueAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAnnotation.swift; sourceTree = "<group>"; };
 		1BA5ED35205AFFF800DCD826 /* GoogleAutoCompleteClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAutoCompleteClient.swift; sourceTree = "<group>"; };
+		1BA5ED37205B169E00DCD826 /* VenueDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsVC.swift; sourceTree = "<group>"; };
 		317858A0CF06D8425C8D8AF1 /* Pods-FourSquareNearbyPlacesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlacesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlacesTests/Pods-FourSquareNearbyPlacesTests.release.xcconfig"; sourceTree = "<group>"; };
 		51D0A2B2B584646F4C757FB3 /* Pods-FourSquareNearbyPlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlaces.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlaces/Pods-FourSquareNearbyPlaces.debug.xcconfig"; sourceTree = "<group>"; };
 		563B4FEA718D69F99C102B29 /* Pods-FourSquareNearbyPlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FourSquareNearbyPlaces.release.xcconfig"; path = "Pods/Target Support Files/Pods-FourSquareNearbyPlaces/Pods-FourSquareNearbyPlaces.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				1B025FF32053D7FD00EF63D7 /* VenuesPageVC.swift */,
+				1BA5ED37205B169E00DCD826 /* VenueDetailsVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				1B0260242055773900EF63D7 /* FourSquareRequestClient.swift in Sources */,
 				1BA5ED3220571D8A00DCD826 /* VenueAnnotation.swift in Sources */,
 				1B0260262055774600EF63D7 /* RequestManager.swift in Sources */,
+				1BA5ED38205B169E00DCD826 /* VenueDetailsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,7 +41,7 @@ class VenuesPageVC: UIViewController {
         venuesTableView.rowHeight = UITableViewAutomaticDimension
         
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.requestWhenInUseAuthorization()
 
         autocompleteIsVisible = false
@@ -58,8 +58,8 @@ class VenuesPageVC: UIViewController {
 
                     let annotation = MKPointAnnotation()
                     let centerCoordinate = CLLocationCoordinate2D(
-                        latitude: Double(item.venueLat),
-                        longitude: Double(item.venueLong))
+                        latitude: item.venueLat,
+                        longitude: item.venueLong)
 
                     annotation.coordinate = centerCoordinate
                     annotation.title = item.venueName
@@ -76,6 +76,17 @@ class VenuesPageVC: UIViewController {
         mapView.delegate = self
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vm = sender as? VenueVM,
+            let destination = segue.destination as? VenueDetailsVC
+            else {
+                return
+        }
+        
+        destination.viewModel = VenueDetailsVM(with: vm)
+
+    }
+    
     // MARK: - LocationManager delegate methods
 
     @IBAction func action(_ sender: Any) {
@@ -202,6 +213,8 @@ extension VenuesPageVC: UITableViewDelegate {
         if tableView == autoCompleteTableView {
             viewModel.didSelect(autocompleteItemAt: indexPath)
             autocompleteIsVisible = false
+        } else {
+            self.performSegue(withIdentifier: "showVenueDetails", sender: viewModel.viewModel(forVenueAt: indexPath))
         }
     }
 

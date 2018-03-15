@@ -20,11 +20,11 @@ struct VenueVM {
         return venue.address.address
     }
 
-    var venueLat: Float {
+    var venueLat: Double {
         return venue.address.latitude
     }
 
-    var venueLong: Float {
+    var venueLong: Double {
         return venue.address.longitude
     }
 

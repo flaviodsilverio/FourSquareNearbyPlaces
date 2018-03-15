@@ -28,8 +28,8 @@ struct Venue {
 
 struct AddressDetails {
 
-    let latitude: Float
-    let longitude: Float
+    let latitude: Double
+    let longitude: Double
     let address: String
     let cc: String
     let city: String
@@ -37,8 +37,8 @@ struct AddressDetails {
     let country: String
 
     init(with json: JSON) {
-        latitude = json["lat"] as? Float ?? 0
-        longitude = json["lng"] as? Float ?? 0
+        latitude = json["lat"] as? Double ?? 0.0
+        longitude = json["lng"] as? Double ?? 0.0
         address = json["address"] as? String ?? "N/A"
         cc = json["cc"] as? String ?? "N/A"
         city = json["city"] as? String ?? "N/A"
