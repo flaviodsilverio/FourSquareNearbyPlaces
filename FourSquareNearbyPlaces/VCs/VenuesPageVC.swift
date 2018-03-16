@@ -35,8 +35,6 @@ class VenuesPageVC: UIViewController {
         let nib = UINib(nibName: "VenueListItemCell", bundle: nil)
         venuesTableView.register(nib, forCellReuseIdentifier: "venueCell")
 
-        mapView.register(VenueAnnotation.self, forAnnotationViewWithReuseIdentifier: "annotationView")
-        
         venuesTableView.estimatedRowHeight = 80
         venuesTableView.rowHeight = UITableViewAutomaticDimension
         

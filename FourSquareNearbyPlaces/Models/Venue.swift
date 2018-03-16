@@ -13,6 +13,7 @@ struct Venue {
     let id: String
     let name: String
     let address: AddressDetails
+    //let iconLink: String
 
     init?(with json: JSON) {
 
@@ -23,6 +24,8 @@ struct Venue {
         self.id = id
         self.name = name
         self.address = AddressDetails(with: json["location"] as? JSON ?? [:])
+
+        //guard let prefix = json[""]
     }
 }
 

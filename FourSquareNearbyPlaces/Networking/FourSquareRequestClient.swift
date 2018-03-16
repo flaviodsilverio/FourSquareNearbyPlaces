@@ -32,24 +32,20 @@ final class FourSquareRequestClient {
 
     func get(venuesForLatitude lat: Double,andLongitude long: Double){
 
-        guard let endpoint = (basePath + "venues/search?ll=" + lat.description +
-            "," + long.description + "&v=" + version + "&client_id="
-            + clientID + "&client_secret=" + secret) as? String
-        else { return }
+        get(requestWith: generate(endPointWith: lat, long: long, andNear: nil))
 
-        requestManager.get(requestWith: endpoint, { (success,data,error) in
-            if success == true, data != nil {
-                self.delegate?.fourSquareRequest(successWith: data!)
-            }
-        })
     }
 
     func get(venuesNear location: String){
 
-        guard let endpoint = (basePath + "venues/search?near=" + location + "&v=" + version + "&client_id="
-            + clientID + "&client_secret=" + secret) as? String
-            else { return }
-        
+        get(requestWith: generate(endPointWith: nil, long: nil, andNear: location))
+
+    }
+
+    fileprivate func get(requestWith endPoint: String?) {
+
+        guard let endpoint = endPoint else { return }
+
         requestManager.get(requestWith: endpoint, { (success,data,error) in
             if success == true, data != nil {
                 self.delegate?.fourSquareRequest(successWith: data!)
@@ -57,4 +53,27 @@ final class FourSquareRequestClient {
         })
     }
 
+    fileprivate func generate(endPointWith lat: Double?, long lng: Double?, andNear location: String?) -> String? {
+
+        guard let location = location else {
+
+            guard let lat = lat,
+                let lng = lng else { return nil }
+
+            guard let endpoint = (basePath + "venues/search?ll=" + lat.description +
+                "," + lng.description + "&v=" + version + "&client_id="
+                + clientID + "&client_secret=" + secret) as? String
+                else { return nil }
+
+            return endpoint
+
+        }
+
+        guard let endpoint = (basePath + "venues/search?near=" + location + "&v=" + version + "&client_id="
+            + clientID + "&client_secret=" + secret) as? String
+            else { return nil }
+
+        return endpoint
+
+    }
 }

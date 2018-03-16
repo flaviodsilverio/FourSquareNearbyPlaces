@@ -40,9 +40,9 @@ struct AutocompleteVM {
     }
     
     var searchTerm: String {
-        let string = locationName.trimmingCharacters(in: .whitespaces)
-        print(string)
-        return string.replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: ",", with: "")
+//        let string = locationName.trimmingCharacters(in: .whitespaces)
+ //       print(string)
+        return locationName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     }
 
     var json : JSON
