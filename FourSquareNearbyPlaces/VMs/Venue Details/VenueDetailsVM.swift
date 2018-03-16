@@ -16,6 +16,10 @@ struct VenueDetailsVM {
         return "https://www.google.com/maps/?q=\(coordinates.lat),\(coordinates.lng)"
     }
 
+    var venueLocation: String {
+        return venueVM.venueLocation
+    }
+
     var venueName: String {
         return venueVM.venueName
     }

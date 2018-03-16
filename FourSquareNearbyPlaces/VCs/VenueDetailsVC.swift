@@ -11,20 +11,42 @@ import MapKit
 
 final class VenueDetailsVC: UIViewController {
 
-    var viewModel : VenueDetailsVM!
+    var viewModel : VenueDetailsVM! {
+        didSet {
+
+
+            
+        }
+    }
     
     @IBOutlet weak var mapView : MKMapView!
     
+    @IBOutlet weak var takeMeButton: UIButton!
+    @IBOutlet weak var venueNameLabel: UILabel!
+    @IBOutlet weak var venueAddressLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.center(mapOn: CLLocation(latitude: viewModel.coordinates.lat, longitude: viewModel.coordinates.lng))
-        
+
+
+        takeMeButton.layer.cornerRadius = takeMeButton.frame.size.height / 2
+        takeMeButton.layer.borderWidth = 2
+        takeMeButton.layer.borderColor = UIColor.blue.cgColor
+        takeMeButton.backgroundColor = .blue
+        takeMeButton.setTitleColor(.white, for: .normal)
+
+        venueNameLabel.text = viewModel.venueName
+        venueAddressLabel.text = viewModel.venueLocation
+
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+
+        self.mapView.center(on: viewModel.coordinates.lat, and: viewModel.coordinates.lng)
+
         let annotation = MKPointAnnotation()
         let centerCoordinate = CLLocationCoordinate2D(
             latitude: viewModel.coordinates.lat,
             longitude: viewModel.coordinates.lng)
-        
+
         annotation.coordinate = centerCoordinate
         annotation.title = viewModel.venueName
         self.mapView.addAnnotation(annotation)
@@ -44,11 +66,3 @@ final class VenueDetailsVC: UIViewController {
 
 }
 
-extension VenueDetailsVC: MKMapViewDelegate {
-
-    func center(mapOn location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  500, 500)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-}

@@ -74,6 +74,13 @@ class VenuesPageVC: UIViewController {
         mapView.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vm = sender as? VenueVM,
             let destination = segue.destination as? VenueDetailsVC
