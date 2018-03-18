@@ -8,41 +8,22 @@
 
 import Foundation
 
-typealias JSON = [String: Any]
-
 final class RequestManager {
 
     static let shared = RequestManager()
 
     let session = URLSession.shared
 
+    func get(requestWith url: URL, _
+        completion: @escaping ((_ success: Bool, _ data: JSON?, _ error: String?) -> Void)) {
 
-
-    func post(requestWith endpoint: String, andQuery query: JSON,_
-        completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)){
-        //There's no need for post requests on the current demo project, otherwise they'd be built here.
-    }
-
-    func get(requestWith endpoint: String,_
-        completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)) {
-
-        guard let request = make(requestWith: endpoint) else {
-            completion(false, nil, "")
-            return
-        }
+        let request = URLRequest(url: url)
 
         perform(requestWith: request, completion)
     }
 
-    private func make(requestWith endpoint: String) -> URLRequest? {
-
-        guard let url = URL(string: endpoint)  else { return nil }
-
-        return URLRequest(url: url)
-    }
-
     private func perform(requestWith urlRequest: URLRequest, _
-        completion: @escaping ((_ success: Bool,_ data: JSON?,_ error: String?) -> Void)) {
+        completion: @escaping ((_ success: Bool, _ data: JSON?, _ error: String?) -> Void)) {
 
         session.dataTask(with: urlRequest) { (data, urlResponse, error) in
             guard let urlResponse = urlResponse as? HTTPURLResponse else {
@@ -59,17 +40,15 @@ final class RequestManager {
                     }
 
                 } catch let error as NSError {
-
+                    DispatchQueue.main.async {
+                        completion(false, nil, error.description)
+                    }
                 }
-            case 400:
-                print(urlRequest)
-                break
             default:
-                break
+                DispatchQueue.main.async {
+                    completion(false, nil, urlResponse.description)
+                }
             }
-            print(urlResponse.statusCode)
-        }.resume()
-
-
-        }
+            }.resume()
     }
+}

@@ -11,23 +11,16 @@ import MapKit
 
 final class VenueDetailsVC: UIViewController {
 
-    var viewModel : VenueDetailsVM! {
-        didSet {
+    var viewModel: VenueDetailsVM!
 
+    @IBOutlet weak var mapView: MKMapView!
 
-            
-        }
-    }
-    
-    @IBOutlet weak var mapView : MKMapView!
-    
     @IBOutlet weak var takeMeButton: UIButton!
     @IBOutlet weak var venueNameLabel: UILabel!
     @IBOutlet weak var venueAddressLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         takeMeButton.layer.cornerRadius = takeMeButton.frame.size.height / 2
         takeMeButton.layer.borderWidth = 2
@@ -50,19 +43,13 @@ final class VenueDetailsVC: UIViewController {
         annotation.coordinate = centerCoordinate
         annotation.title = viewModel.venueName
         self.mapView.addAnnotation(annotation)
-        
     }
 
     @IBAction func takeMeAction(_ sender: UIButton) {
-        
+
         guard let address = viewModel.mapAddress,
             let url = URL(string: address) else { return }
-        
+
         UIApplication.shared.open(url)
     }
-    
-//        UIApplication.shared.open(URL(string:"https://www.google.com/maps/@42.585444,13.007813,6z")!)
-    //https://www.google.com/maps/?q=-15.623037,18.388672
-
 }
-

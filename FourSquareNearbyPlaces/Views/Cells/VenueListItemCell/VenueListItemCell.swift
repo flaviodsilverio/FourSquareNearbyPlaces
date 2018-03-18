@@ -13,21 +13,9 @@ class VenueListItemCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    func configure(with viewModel: VenueVM) {
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    func configure(with vm: VenueVM) {
-
-        locationLabel.text = vm.venueLocation
-        nameLabel.text = vm.venueName
-        
+        locationLabel.text = viewModel.venueLocation
+        nameLabel.text = viewModel.venueName
     }
 }

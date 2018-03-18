@@ -8,51 +8,6 @@
 
 import Foundation
 
-struct VenueVM {
-
-    fileprivate let venue: Venue
-
-    var venueName: String {
-        return venue.name
-    }
-    
-    var venueLocation: String {
-        return venue.address.address
-    }
-
-    var venueLat: Double {
-        return venue.address.latitude
-    }
-
-    var venueLong: Double {
-        return venue.address.longitude
-    }
-
-    init(with venue: Venue) {
-        self.venue = venue
-    }
-}
-
-struct AutocompleteVM {
-
-    var locationName : String {
-        return json["description"] as? String ?? "nope"
-    }
-    
-    var searchTerm: String {
-//        let string = locationName.trimmingCharacters(in: .whitespaces)
- //       print(string)
-        return locationName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-    }
-
-    var json : JSON
-
-    init(with json: JSON) {
-        self.json = json
-    }
-
-}
-
 final class VenuesPageVM {
 
     var venuesViewModels: [VenueVM] = []
@@ -61,13 +16,14 @@ final class VenuesPageVM {
     let fourSquareClient = FourSquareRequestClient()
     let googleClient = GoogleAutoCompleteClient()
 
-    var completion : ((_ success: Bool, _ error: String?) -> Void)?
+    var dataUpdated: ((_ success: Bool, _ error: String?) -> Void)?
+    var autocompletionUpdated: (() -> Void)?
 
-    var isCurrentLocation : Bool = true
+    var isCurrentLocation: Bool = true
 
-    var currentCoordinates : (lat: Double, long: Double) = (0,0)
+    var currentCoordinates: (lat: Double, long: Double) = (0, 0)
 
-    var searchText : String = "" {
+    var searchText: String = "" {
         didSet {
             googleClient.get(placeWith: searchText)
         }
@@ -119,8 +75,6 @@ extension VenuesPageVM: FourSquareRequestClientDelegate {
 
     func getData(near location: String?) {
 
-        print(location)
-        
         guard let location = location else {
             fourSquareClient.get(venuesForLatitude: currentCoordinates.lat, andLongitude: currentCoordinates.long)
             return
@@ -133,7 +87,7 @@ extension VenuesPageVM: FourSquareRequestClientDelegate {
         guard let jsonResponse = data["response"] as? JSON,
             let items = jsonResponse["venues"] as? [JSON]
             else { print("error"); return }
-        
+
         if isCurrentLocation == false {
             guard let geocode = jsonResponse["geocode"] as? JSON,
             let feature = geocode["feature"] as? JSON,
@@ -143,18 +97,19 @@ extension VenuesPageVM: FourSquareRequestClientDelegate {
                 let lng = center["lng"] as? Double else {
                     return
             }
-            currentCoordinates = (lat,lng)
+            currentCoordinates = (lat, lng)
         }
 
         venuesViewModels = []
-        
+
         items.forEach {
             venuesViewModels.append(VenueVM(with: Venue(with: $0)!))
         }
-        completion?(true, nil)
+        dataUpdated?(true, nil)
     }
 
     func fourSquareRequest(errorWith text: String) {
+        dataUpdated?(false, text)
     }
 }
 
@@ -170,8 +125,6 @@ extension VenuesPageVM: GoogleAutoCompleteDelegate {
             autoCompleteViewModels.append(AutocompleteVM(with: $0))
         }
 
-        completion?(true, nil)
+        autocompletionUpdated?()
     }
 }
-
-

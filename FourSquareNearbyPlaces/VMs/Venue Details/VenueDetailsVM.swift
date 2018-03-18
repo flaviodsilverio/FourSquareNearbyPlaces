@@ -10,9 +10,9 @@ import Foundation
 
 struct VenueDetailsVM {
 
-    fileprivate let venueVM : VenueVM
+    fileprivate let venueVM: VenueVM
 
-    var mapAddress : String? {
+    var mapAddress: String? {
         return "https://www.google.com/maps/?q=\(coordinates.lat),\(coordinates.lng)"
     }
 

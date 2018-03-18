@@ -15,7 +15,7 @@ protocol FourSquareRequestClientDelegate: class {
 
 final class FourSquareRequestClient {
 
-    //This client could be wya more flexible if we had those lets as injectable dependencies,
+    //This client could be way more flexible if we had those lets as injectable dependencies,
     //but for the demo purposes it won't be very flexible, it'll be very static.
 
     let secret = "3FCXEDF3AFTU5SG3OHXVYIQGJM2HNISMYGBHBB4VEHFDFBIG"
@@ -27,53 +27,51 @@ final class FourSquareRequestClient {
     weak var delegate: FourSquareRequestClientDelegate?
 
     let requestManager = RequestManager.shared
+    var currentRequest: URLRequest?
 
-    var currentRequest : URLRequest?
+    func get(venuesForLatitude lat: Double, andLongitude long: Double) {
 
-    func get(venuesForLatitude lat: Double,andLongitude long: Double){
-
-        get(requestWith: generate(endPointWith: lat, long: long, andNear: nil))
-
-    }
-
-    func get(venuesNear location: String){
-
-        get(requestWith: generate(endPointWith: nil, long: nil, andNear: location))
+        get(requestWith: generate(urlWith: lat, long: long, andNear: nil))
 
     }
 
-    fileprivate func get(requestWith endPoint: String?) {
+    func get(venuesNear location: String) {
 
-        guard let endpoint = endPoint else { return }
+        get(requestWith: generate(urlWith: nil, long: nil, andNear: location))
 
-        requestManager.get(requestWith: endpoint, { (success,data,error) in
+    }
+
+    fileprivate func get(requestWith url: URL?) {
+
+        guard let url = url else { return }
+
+        requestManager.get(requestWith: url, { (success, data, error) in
             if success == true, data != nil {
                 self.delegate?.fourSquareRequest(successWith: data!)
+            } else {
+                guard let error = error else { return }
+
+                self.delegate?.fourSquareRequest(errorWith: error)
             }
         })
     }
 
-    fileprivate func generate(endPointWith lat: Double?, long lng: Double?, andNear location: String?) -> String? {
+    fileprivate func generate(urlWith lat: Double?, long lng: Double?, andNear location: String?) -> URL? {
 
-        guard let location = location else {
+        var urlComponents = URLComponents(string: basePath + "venues/search?")!
 
-            guard let lat = lat,
-                let lng = lng else { return nil }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "v", value: version),
+            URLQueryItem(name: "client_id", value: clientID),
+            URLQueryItem(name: "client_secret", value: secret)
+        ]
 
-            guard let endpoint = (basePath + "venues/search?ll=" + lat.description +
-                "," + lng.description + "&v=" + version + "&client_id="
-                + clientID + "&client_secret=" + secret) as? String
-                else { return nil }
-
-            return endpoint
-
+        if let location = location {
+            urlComponents.queryItems?.append(URLQueryItem(name: "near", value: location))
+        } else if let lat = lat, let lng = lng {
+            urlComponents.queryItems?.append(URLQueryItem(name: "ll", value: lat.description + "," + lng.description))
         }
 
-        guard let endpoint = (basePath + "venues/search?near=" + location + "&v=" + version + "&client_id="
-            + clientID + "&client_secret=" + secret) as? String
-            else { return nil }
-
-        return endpoint
-
+        return urlComponents.url
     }
 }

@@ -15,11 +15,12 @@ class VenuesPageVC: UIViewController {
     @IBOutlet weak var venuesTableView: UITableView!
     @IBOutlet weak var autoCompleteTableView: UITableView!
 
+    @IBOutlet weak var searchBar: UISearchBar!
     var locationManager = CLLocationManager()
 
     let viewModel = VenuesPageVM()
 
-    var autocompleteIsVisible : Bool = false {
+    var autocompleteIsVisible: Bool = false {
         didSet {
             if autocompleteIsVisible {
                 self.view.bringSubview(toFront: autoCompleteTableView)
@@ -37,20 +38,21 @@ class VenuesPageVC: UIViewController {
 
         venuesTableView.estimatedRowHeight = 80
         venuesTableView.rowHeight = UITableViewAutomaticDimension
-        
+
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.requestWhenInUseAuthorization()
 
         autocompleteIsVisible = false
 
-        viewModel.completion = {
-            (success, error) in
+        mapView.delegate = self
+
+        viewModel.dataUpdated = {
+            [unowned self] (success, error) in
 
             if success == true {
 
                 self.venuesTableView.reloadData()
-                self.autoCompleteTableView.reloadData()
 
                 self.viewModel.venuesViewModels.forEach { item in
 
@@ -63,15 +65,25 @@ class VenuesPageVC: UIViewController {
                     annotation.title = item.venueName
                     self.mapView.addAnnotation(annotation)
                 }
-                
+
                 self.center(mapOn: CLLocation(latitude: self.viewModel.currentCoordinates.lat,
                                               longitude: self.viewModel.currentCoordinates.long))
+            } else if error != nil {
 
-//                self.autocompleteIsVisible = false
+                let alertView = UIAlertController(title: "Error", message: error!, preferredStyle: .alert)
+                alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+                self.show(alertView, sender: self)
             }
         }
 
-        mapView.delegate = self
+        viewModel.autocompletionUpdated = {
+            [weak self] in
+            self?.autoCompleteTableView.stopLoading()
+            self?.autoCompleteTableView.reloadData()
+        }
+
+        locationManager.requestLocation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,11 +99,11 @@ class VenuesPageVC: UIViewController {
             else {
                 return
         }
-        
+
         destination.viewModel = VenueDetailsVM(with: vm)
 
     }
-    
+
     // MARK: - LocationManager delegate methods
 
     @IBAction func action(_ sender: Any) {
@@ -112,15 +124,9 @@ extension VenuesPageVC: MKMapViewDelegate {
         viewModel.updateLocation(forLatitude: latitude, andLongitude: longitude)
     }
 
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//
-//        guard let annotationView = mapView.dequeueReusableAnnotationView(
-//    withIdentifier: "annotationView") as? VenueAnnotation else { return nil }
-//
-//        annotationView.configure(with: VenueVM(with: Venue(with: venue())!))
-//
-//        return annotationView
-//    }
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        self.searchBar.resignFirstResponder()
+    }
 }
 
 extension VenuesPageVC: CLLocationManagerDelegate {
@@ -141,14 +147,8 @@ extension VenuesPageVC: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        /*        let annotation = MKPointAnnotation()
-         let centerCoordinate = CLLocationCoordinate2D(latitude: 41, longitude:29)
-         annotation.coordinate = centerCoordinate
-         annotation.title = "Title"
-         mapView.addAnnotation(annotation)*/
-        guard let location = locations.last else { return }
 
-        //mapView.setCenter(location.coordinate, animated: true)
+        guard let location = locations.last else { return }
 
         center(mapOn: location)
 
@@ -201,7 +201,7 @@ extension VenuesPageVC: UITableViewDataSource {
 
         } else {
 
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autocompleteCell") as? UITableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autocompleteCell")
                 else { return UITableViewCell() }
 
             cell.textLabel?.text = viewModel.autoCompleteViewModels[indexPath.row].locationName
@@ -236,40 +236,10 @@ extension VenuesPageVC: UISearchBarDelegate {
         if searchText == "" {
             autocompleteIsVisible = false
         } else {
+            autoCompleteTableView.startLoading()
             autocompleteIsVisible = true
         }
 
         viewModel.searchText = searchText
     }
-}
-
-extension VenuesPageVC {
-    func venue() -> JSON {
-        return  ["id": "4fb147e9e4b08885003346dd",
-        "name": "pengegon institute",
-        "location": [
-            "address": "Pengegon",
-            "lat": 50.21542970853104,
-            "lng": -5.283300233794709,
-            "labeledLatLngs": [
-            [
-            "label": "display",
-            "lat": 50.21542970853104,
-            "lng": -5.283300233794709
-            ]
-            ],
-            "distance": 30,
-            "cc": "GB",
-            "city": "Camborne",
-            "state": "Cornualha",
-            "country": "Reino Unido",
-            "formattedAddress": [
-            "Pengegon",
-            "Camborne",
-            "Cornualha",
-            "Reino Unido"
-            ]
-        ]
-    ]
-}
 }

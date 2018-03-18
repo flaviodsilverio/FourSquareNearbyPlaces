@@ -10,18 +10,18 @@ import Foundation
 
 struct Venue {
 
-    let id: String
+    let identifier: String
     let name: String
     let address: AddressDetails
     //let iconLink: String
 
     init?(with json: JSON) {
 
-        guard let id = json["id"] as? String, let name = json["name"] as? String else {
+        guard let identifier = json["id"] as? String, let name = json["name"] as? String else {
             return nil
         }
 
-        self.id = id
+        self.identifier = identifier
         self.name = name
         self.address = AddressDetails(with: json["location"] as? JSON ?? [:])
 
@@ -34,7 +34,7 @@ struct AddressDetails {
     let latitude: Double
     let longitude: Double
     let address: String
-    let cc: String
+    let ccc: String
     let city: String
     let state: String
     let country: String
@@ -43,7 +43,7 @@ struct AddressDetails {
         latitude = json["lat"] as? Double ?? 0.0
         longitude = json["lng"] as? Double ?? 0.0
         address = json["address"] as? String ?? "N/A"
-        cc = json["cc"] as? String ?? "N/A"
+        ccc = json["cc"] as? String ?? "N/A"
         city = json["city"] as? String ?? "N/A"
         state = json["state"] as? String ?? "N/A"
         country = json["country"] as? String ?? "N/A"
